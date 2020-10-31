@@ -1,12 +1,14 @@
 package ru.geekbrains;
 
+import java.util.Arrays;
+
 public class MainApp {
     // lesson2
     // Задание 1
     public static void invertArray() { // Создали метод invertArray
         int[] arr = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0}; // Задали числовой массив
         for (int i = 0; i < arr.length; i++) { // Циклом прошлись по элементам массива
-            if (arr[i] == 0) { // Если индекс 0 то присвоить 1
+            if (arr[i] == 0) { // Если индекс равеен 0 то присвоить 1
                 arr[i] = 1;
             } else arr[i] = 0; // Остальное 0
             System.out.print(arr[i] + " "); // Проверка выводом на экран
@@ -108,12 +110,43 @@ public class MainApp {
 
         }
 
-    // Задание 7   Пример {0, 1, 2}  сделать {2,0,1} при m =1;  Гле m -  количество смещений.
-        private static void move(int[] arr, int offset){  // Создали метод который не возвращает, принимает массив и число offset)
+    // Задание 7
+    private static void move(int[] arr, int offset) {  // Создали метод который не возвращает, принимает массив и число offset)
+        System.out.println("offset = " + offset + ", before: " + Arrays.toString(arr)); // Выводим в консоль offset (число смещений) и массив значения ДО
+        int offsetModule = Math.abs(offset); // присваиваем offsetModule значение модуля offset ч/з библиотеку Math
+        if (offset == 0 || offsetModule == arr.length) {// если смещение = 0 или  его модуль = длинне массива то делать не чего не нужно
+            System.out.println("after: " + Arrays.toString(arr)); // значение после
+            return;
+        }
+        // пересчет offset если его модуль больше длины массива
+        if (offset > arr.length)  //если число смещений больше длины массива
+            offset -= arr.length; // то отнимаем у числа смещений длину массива
+        else if (offsetModule > arr.length)  // для отрицательного смещения, берем его модуль и если он больше длины массива
+            offset += arr.length;  //  Отнимаем от числа смещений длину массива (+ потмоу что число смещений отрицательное)
 
+
+        for (int step = 0; step < offsetModule; step++)  // создадим цикл, количетво итераций = модулю смещения
+            if (offset > 0)  // если смещение положитеьное, то
+                for (int j = 0; j < arr.length; j++)    // идем от начала массива
+                    // ТУТ НУЖЕН МЕТОД КОТОРЫЙ БУДЕТ МЕНЯТЬ ЭЛЕМЕНТЫ МАССИВА
+                    swapWithLastElement(arr, j); // меняем каждый элемент с последним
+
+            else
+                for (int j = arr.length - 1; j >= 0; j--)  // идем от конца массива
+                    swapWithLastElement(arr, j); // меняем каждый элемент с последним
+        System.out.println("after:" + Arrays.toString(arr)); // значение после
 
     }
 
+
+
+    // Метод swapWithLastElement ничего не возвращает и принимает массив arr  и index ( идекс элемента массива)
+    public static void swapWithLastElement(int[] arr, int index){  // Созадли метод который будет менять наши элементы массива
+
+        int replacamentValue = arr[index]; // Создали переменную чтобы запомнить значение массива которое будем заменять
+        arr[index] = arr[arr.length-1]; // присваиваем каждому индексу значение последнего элемента в массиве
+        arr[arr.length-1] = replacamentValue;
+    }
 
 
 
@@ -122,7 +155,13 @@ public class MainApp {
     public static void main(String[] args) {
 
         System.out.println(checkBalance(new int[]{1,2,3,4}));
+        move(new int[] {0,1,2,3,4}, 5);
+        move(new int[] {0,1,2,3,4,5,6}, 1);
+        move(new int[] {0,1,2,3,4,5}, -6);
+        move(new int[] {0,1,2,3}, 0);
+
+
 
     }
-    }
+}
 
