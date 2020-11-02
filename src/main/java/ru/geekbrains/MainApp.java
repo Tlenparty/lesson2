@@ -38,48 +38,37 @@ public class MainApp {
 
     // Задание 4
     public static void fillDiagonal() {
-
-        int[][] arr = new int[4][4];
+        int size = 5;
+        int[][] arr = new int[size][size];
         // 0 0 0 0  |  1 0 0 0   arr [0][0] = 1;
         // 0 0 0 0  |  0 1 0 0   arr [1][1] = 1;
         // 0 0 0 0  |  0 0 1 0   arr [2][2] = 1;
         // 0 0 0 0  |  0 0 0 1   arr [3][3] = 1;
         //           i __________j
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (i == j) {  // Если индекс равны то присваиваем 1
-                    arr[i][j] = 1;
-                } else arr[i][j] = 0;  // если нет 0
-                System.out.print(arr[i][j] + " "); // Вывод в консоль чтобы проверить
-            }
-            System.out.println();
-
+        for (int i = 0; i < size; i++) {
+            arr[i][i] = 1;
+            arr[i][size - i - 1] = 1;
         }
-    }
+            System.out.println();
+        }
+
 
     // Задание 5
-    public static void findMax() {
-        int max = 0;
-        int min = 0;
-        int[] w = {0, 10, 5,};
+    public static void findMax(int[] array) {
+        int max = array[0];
+        int min = array[0];
 
-        for (int i = 0; i< w.length; i++) {
+        for (int i = 0; i < array.length; i++) {
+            min = array[i];
 
-            if ((w[0] > w[1]) && (w[0] > w[2])) {
-                max = w[0] ;
-            } else if ((w[1] > w[2]) && (w[1] > w[0])) {
-                max = w[1] ;
-            } else max = w[2] ;
-            if ((w[0] < w[1]) && (w[0] < w[2])) {
-                min = w[0] ;
-            } else if ((w[1] < w[2]) && (w[1] < w[0])) {
-                min = w[1] ;
-            } else  min = w[2];
+            if (array[i] > max) {
+                max = array[i];
+            }
 
         }
-        System.out.println("Максимум = " + max );
-        System.out.println("Минимум = " + min );
+        System.out.println("Минимальное значение:" + min);
+        System.out.println("Максимальное значение" + max);
     }
 
 
