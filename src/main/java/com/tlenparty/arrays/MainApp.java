@@ -1,9 +1,8 @@
-package ru.geekbrains;
+package com.tlenparty.arrays;
 
 import java.util.Arrays;
 
 public class MainApp {
-    // lesson2
     // Задание 1
     public static void invertArray() { // Создали метод invertArray
         int[] arr = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0}; // Задали числовой массив
